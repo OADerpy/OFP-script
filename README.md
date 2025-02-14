@@ -12,4 +12,4 @@ Program to automate filling out the OSMAA Operational Flight Plan
 6. now go into the output folder to fill in the remaining information
 
 7. [optional] to merge multiple output files into 1 pdf document, run "2merge.bat"
-8. !Caution! after you run "2merge.bat", you cannot change the information in the fields anymore
+!Caution! after you run "2merge.bat", you cannot change the information in the fields anymore
