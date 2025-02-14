@@ -1,0 +1,3318 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=960, initial-scale=1" />
+        <title>ForeFlight Navlog</title>
+        <script>&#xD;&#xA;                function setTheme(theme) {&#xD;&#xA;                    var body = document.getElementsByTagName(&#x27;body&#x27;);&#xD;&#xA;                    body[0].className = theme;&#xD;&#xA;                    return &#x27;Navlog theme set to &#x27;&#x2B;theme;&#xD;&#xA;                  }&#xD;&#xA;            </script>
+        <style>
+/* CSS Reset */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+
+ol,
+ul {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+    blockquote:before,
+    blockquote:after,
+    q:before,
+    q:after {
+        content: "";
+        content: none;
+    }
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    text-align: left;
+}
+
+    table.waypoint-summary {
+        border-collapse: separate;
+    }
+
+* {
+    box-sizing: border-box;
+}
+
+/* Grid System */
+.clearfix:before,
+.clearfix:after,
+.container:before,
+.container:after,
+.container-fluid:before,
+.container-fluid:after,
+.row:before,
+.row:after {
+    display: table;
+    content: " ";
+}
+
+.clearfix:after,
+.dl-horizontal dd:after,
+.container:after,
+.container-fluid:after,
+.row:after {
+    clear: both;
+}
+
+.container-fluid {
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.row {
+    margin-right: -10px;
+    margin-left: -10px;
+}
+
+.padding-top10 {
+    padding-top: 10px;
+}
+
+.padding-top20 {
+    padding-top: 20px;
+}
+
+.padding-top30 {
+    padding-top: 30px;
+}
+
+.padding-top40 {
+    padding-top: 40px;
+}
+
+.padding-top50 {
+    padding-top: 50px;
+}
+
+.padding-top60 {
+    padding-top: 60px;
+}
+
+.row-no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+    .row-no-gutters [class*="col-"] {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+.width-50 {
+    width: 50%;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+.col-xs-1,
+.col-sm-1,
+.col-md-1,
+.col-lg-1,
+.col-xs-2,
+.col-sm-2,
+.col-md-2,
+.col-lg-2,
+.col-xs-3,
+.col-sm-3,
+.col-md-3,
+.col-lg-3,
+.col-xs-4,
+.col-sm-4,
+.col-md-4,
+.col-lg-4,
+.col-xs-5,
+.col-sm-5,
+.col-md-5,
+.col-lg-5,
+.col-xs-6,
+.col-sm-6,
+.col-md-6,
+.col-lg-6,
+.col-xs-7,
+.col-sm-7,
+.col-md-7,
+.col-lg-7,
+.col-xs-8,
+.col-sm-8,
+.col-md-8,
+.col-lg-8,
+.col-xs-9,
+.col-sm-9,
+.col-md-9,
+.col-lg-9,
+.col-xs-10,
+.col-sm-10,
+.col-md-10,
+.col-lg-10,
+.col-xs-11,
+.col-sm-11,
+.col-md-11,
+.col-lg-11,
+.col-xs-12,
+.col-sm-12,
+.col-md-12,
+.col-lg-12 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.col-xs-1,
+.col-xs-2,
+.col-xs-3,
+.col-xs-4,
+.col-xs-5,
+.col-xs-6,
+.col-xs-7,
+.col-xs-8,
+.col-xs-9,
+.col-xs-10,
+.col-xs-11,
+.col-xs-12 {
+    float: left;
+}
+
+.col-xs-12 {
+    width: 100%;
+}
+
+.col-xs-11 {
+    width: 91.66666667%;
+}
+
+.col-xs-10 {
+    width: 83.33333333%;
+}
+
+.col-xs-9 {
+    width: 75%;
+}
+
+.col-xs-8 {
+    width: 66.66666667%;
+}
+
+.col-xs-7 {
+    width: 58.33333333%;
+}
+
+.col-xs-6 {
+    width: 50%;
+}
+
+.col-xs-5 {
+    width: 41.66666667%;
+}
+
+.col-xs-4 {
+    width: 33.33333333%;
+}
+
+.col-xs-3 {
+    width: 25%;
+}
+
+.col-xs-2 {
+    width: 16.66666667%;
+}
+
+.col-xs-1 {
+    width: 8.33333333%;
+}
+
+.col-xs-pull-12 {
+    right: 100%;
+}
+
+.col-xs-pull-11 {
+    right: 91.66666667%;
+}
+
+.col-xs-pull-10 {
+    right: 83.33333333%;
+}
+
+.col-xs-pull-9 {
+    right: 75%;
+}
+
+.col-xs-pull-8 {
+    right: 66.66666667%;
+}
+
+.col-xs-pull-7 {
+    right: 58.33333333%;
+}
+
+.col-xs-pull-6 {
+    right: 50%;
+}
+
+.col-xs-pull-5 {
+    right: 41.66666667%;
+}
+
+.col-xs-pull-4 {
+    right: 33.33333333%;
+}
+
+.col-xs-pull-3 {
+    right: 25%;
+}
+
+.col-xs-pull-2 {
+    right: 16.66666667%;
+}
+
+.col-xs-pull-1 {
+    right: 8.33333333%;
+}
+
+.col-xs-pull-0 {
+    right: auto;
+}
+
+.col-xs-push-12 {
+    left: 100%;
+}
+
+.col-xs-push-11 {
+    left: 91.66666667%;
+}
+
+.col-xs-push-10 {
+    left: 83.33333333%;
+}
+
+.col-xs-push-9 {
+    left: 75%;
+}
+
+.col-xs-push-8 {
+    left: 66.66666667%;
+}
+
+.col-xs-push-7 {
+    left: 58.33333333%;
+}
+
+.col-xs-push-6 {
+    left: 50%;
+}
+
+.col-xs-push-5 {
+    left: 41.66666667%;
+}
+
+.col-xs-push-4 {
+    left: 33.33333333%;
+}
+
+.col-xs-push-3 {
+    left: 25%;
+}
+
+.col-xs-push-2 {
+    left: 16.66666667%;
+}
+
+.col-xs-push-1 {
+    left: 8.33333333%;
+}
+
+.col-xs-push-0 {
+    left: auto;
+}
+
+.col-xs-offset-12 {
+    margin-left: 100%;
+}
+
+.col-xs-offset-11 {
+    margin-left: 91.66666667%;
+}
+
+.col-xs-offset-10 {
+    margin-left: 83.33333333%;
+}
+
+.col-xs-offset-9 {
+    margin-left: 75%;
+}
+
+.col-xs-offset-8 {
+    margin-left: 66.66666667%;
+}
+
+.col-xs-offset-7 {
+    margin-left: 58.33333333%;
+}
+
+.col-xs-offset-6 {
+    margin-left: 50%;
+}
+
+.col-xs-offset-5 {
+    margin-left: 41.66666667%;
+}
+
+.col-xs-offset-4 {
+    margin-left: 33.33333333%;
+}
+
+.col-xs-offset-3 {
+    margin-left: 25%;
+}
+
+.col-xs-offset-2 {
+    margin-left: 16.66666667%;
+}
+
+.col-xs-offset-1 {
+    margin-left: 8.33333333%;
+}
+
+.col-xs-offset-0 {
+    margin-left: 0%;
+}
+
+@media (min-width: 768px) {
+    .col-sm-1,
+    .col-sm-2,
+    .col-sm-3,
+    .col-sm-4,
+    .col-sm-5,
+    .col-sm-6,
+    .col-sm-7,
+    .col-sm-8,
+    .col-sm-9,
+    .col-sm-10,
+    .col-sm-11,
+    .col-sm-12 {
+        float: left;
+    }
+
+    .col-sm-12 {
+        width: 100%;
+    }
+
+    .col-sm-11 {
+        width: 91.66666667%;
+    }
+
+    .col-sm-10 {
+        width: 83.33333333%;
+    }
+
+    .col-sm-9 {
+        width: 75%;
+    }
+
+    .col-sm-8 {
+        width: 66.66666667%;
+    }
+
+    .col-sm-7 {
+        width: 58.33333333%;
+    }
+
+    .col-sm-6 {
+        width: 50%;
+    }
+
+    .col-sm-5 {
+        width: 41.66666667%;
+    }
+
+    .col-sm-4 {
+        width: 33.33333333%;
+    }
+
+    .col-sm-3 {
+        width: 25%;
+    }
+
+    .col-sm-2 {
+        width: 16.66666667%;
+    }
+
+    .col-sm-1 {
+        width: 8.33333333%;
+    }
+
+    .col-sm-pull-12 {
+        right: 100%;
+    }
+
+    .col-sm-pull-11 {
+        right: 91.66666667%;
+    }
+
+    .col-sm-pull-10 {
+        right: 83.33333333%;
+    }
+
+    .col-sm-pull-9 {
+        right: 75%;
+    }
+
+    .col-sm-pull-8 {
+        right: 66.66666667%;
+    }
+
+    .col-sm-pull-7 {
+        right: 58.33333333%;
+    }
+
+    .col-sm-pull-6 {
+        right: 50%;
+    }
+
+    .col-sm-pull-5 {
+        right: 41.66666667%;
+    }
+
+    .col-sm-pull-4 {
+        right: 33.33333333%;
+    }
+
+    .col-sm-pull-3 {
+        right: 25%;
+    }
+
+    .col-sm-pull-2 {
+        right: 16.66666667%;
+    }
+
+    .col-sm-pull-1 {
+        right: 8.33333333%;
+    }
+
+    .col-sm-pull-0 {
+        right: auto;
+    }
+
+    .col-sm-push-12 {
+        left: 100%;
+    }
+
+    .col-sm-push-11 {
+        left: 91.66666667%;
+    }
+
+    .col-sm-push-10 {
+        left: 83.33333333%;
+    }
+
+    .col-sm-push-9 {
+        left: 75%;
+    }
+
+    .col-sm-push-8 {
+        left: 66.66666667%;
+    }
+
+    .col-sm-push-7 {
+        left: 58.33333333%;
+    }
+
+    .col-sm-push-6 {
+        left: 50%;
+    }
+
+    .col-sm-push-5 {
+        left: 41.66666667%;
+    }
+
+    .col-sm-push-4 {
+        left: 33.33333333%;
+    }
+
+    .col-sm-push-3 {
+        left: 25%;
+    }
+
+    .col-sm-push-2 {
+        left: 16.66666667%;
+    }
+
+    .col-sm-push-1 {
+        left: 8.33333333%;
+    }
+
+    .col-sm-push-0 {
+        left: auto;
+    }
+
+    .col-sm-offset-12 {
+        margin-left: 100%;
+    }
+
+    .col-sm-offset-11 {
+        margin-left: 91.66666667%;
+    }
+
+    .col-sm-offset-10 {
+        margin-left: 83.33333333%;
+    }
+
+    .col-sm-offset-9 {
+        margin-left: 75%;
+    }
+
+    .col-sm-offset-8 {
+        margin-left: 66.66666667%;
+    }
+
+    .col-sm-offset-7 {
+        margin-left: 58.33333333%;
+    }
+
+    .col-sm-offset-6 {
+        margin-left: 50%;
+    }
+
+    .col-sm-offset-5 {
+        margin-left: 41.66666667%;
+    }
+
+    .col-sm-offset-4 {
+        margin-left: 33.33333333%;
+    }
+
+    .col-sm-offset-3 {
+        margin-left: 25%;
+    }
+
+    .col-sm-offset-2 {
+        margin-left: 16.66666667%;
+    }
+
+    .col-sm-offset-1 {
+        margin-left: 8.33333333%;
+    }
+
+    .col-sm-offset-0 {
+        margin-left: 0%;
+    }
+}
+
+@media (min-width: 992px) {
+    .col-md-1,
+    .col-md-2,
+    .col-md-3,
+    .col-md-4,
+    .col-md-5,
+    .col-md-6,
+    .col-md-7,
+    .col-md-8,
+    .col-md-9,
+    .col-md-10,
+    .col-md-11,
+    .col-md-12 {
+        float: left;
+    }
+
+    .col-md-12 {
+        width: 100%;
+    }
+
+    .col-md-11 {
+        width: 91.66666667%;
+    }
+
+    .col-md-10 {
+        width: 83.33333333%;
+    }
+
+    .col-md-9 {
+        width: 75%;
+    }
+
+    .col-md-8 {
+        width: 66.66666667%;
+    }
+
+    .col-md-7 {
+        width: 58.33333333%;
+    }
+
+    .col-md-6 {
+        width: 50%;
+    }
+
+    .col-md-5 {
+        width: 41.66666667%;
+    }
+
+    .col-md-4 {
+        width: 33.33333333%;
+    }
+
+    .col-md-3 {
+        width: 25%;
+    }
+
+    .col-md-2 {
+        width: 16.66666667%;
+    }
+
+    .col-md-1 {
+        width: 8.33333333%;
+    }
+
+    .col-md-pull-12 {
+        right: 100%;
+    }
+
+    .col-md-pull-11 {
+        right: 91.66666667%;
+    }
+
+    .col-md-pull-10 {
+        right: 83.33333333%;
+    }
+
+    .col-md-pull-9 {
+        right: 75%;
+    }
+
+    .col-md-pull-8 {
+        right: 66.66666667%;
+    }
+
+    .col-md-pull-7 {
+        right: 58.33333333%;
+    }
+
+    .col-md-pull-6 {
+        right: 50%;
+    }
+
+    .col-md-pull-5 {
+        right: 41.66666667%;
+    }
+
+    .col-md-pull-4 {
+        right: 33.33333333%;
+    }
+
+    .col-md-pull-3 {
+        right: 25%;
+    }
+
+    .col-md-pull-2 {
+        right: 16.66666667%;
+    }
+
+    .col-md-pull-1 {
+        right: 8.33333333%;
+    }
+
+    .col-md-pull-0 {
+        right: auto;
+    }
+
+    .col-md-push-12 {
+        left: 100%;
+    }
+
+    .col-md-push-11 {
+        left: 91.66666667%;
+    }
+
+    .col-md-push-10 {
+        left: 83.33333333%;
+    }
+
+    .col-md-push-9 {
+        left: 75%;
+    }
+
+    .col-md-push-8 {
+        left: 66.66666667%;
+    }
+
+    .col-md-push-7 {
+        left: 58.33333333%;
+    }
+
+    .col-md-push-6 {
+        left: 50%;
+    }
+
+    .col-md-push-5 {
+        left: 41.66666667%;
+    }
+
+    .col-md-push-4 {
+        left: 33.33333333%;
+    }
+
+    .col-md-push-3 {
+        left: 25%;
+    }
+
+    .col-md-push-2 {
+        left: 16.66666667%;
+    }
+
+    .col-md-push-1 {
+        left: 8.33333333%;
+    }
+
+    .col-md-push-0 {
+        left: auto;
+    }
+
+    .col-md-offset-12 {
+        margin-left: 100%;
+    }
+
+    .col-md-offset-11 {
+        margin-left: 91.66666667%;
+    }
+
+    .col-md-offset-10 {
+        margin-left: 83.33333333%;
+    }
+
+    .col-md-offset-9 {
+        margin-left: 75%;
+    }
+
+    .col-md-offset-8 {
+        margin-left: 66.66666667%;
+    }
+
+    .col-md-offset-7 {
+        margin-left: 58.33333333%;
+    }
+
+    .col-md-offset-6 {
+        margin-left: 50%;
+    }
+
+    .col-md-offset-5 {
+        margin-left: 41.66666667%;
+    }
+
+    .col-md-offset-4 {
+        margin-left: 33.33333333%;
+    }
+
+    .col-md-offset-3 {
+        margin-left: 25%;
+    }
+
+    .col-md-offset-2 {
+        margin-left: 16.66666667%;
+    }
+
+    .col-md-offset-1 {
+        margin-left: 8.33333333%;
+    }
+
+    .col-md-offset-0 {
+        margin-left: 0%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-lg-1,
+    .col-lg-2,
+    .col-lg-3,
+    .col-lg-4,
+    .col-lg-5,
+    .col-lg-6,
+    .col-lg-7,
+    .col-lg-8,
+    .col-lg-9,
+    .col-lg-10,
+    .col-lg-11,
+    .col-lg-12 {
+        float: left;
+    }
+
+    .col-lg-12 {
+        width: 100%;
+    }
+
+    .col-lg-11 {
+        width: 91.66666667%;
+    }
+
+    .col-lg-10 {
+        width: 83.33333333%;
+    }
+
+    .col-lg-9 {
+        width: 75%;
+    }
+
+    .col-lg-8 {
+        width: 66.66666667%;
+    }
+
+    .col-lg-7 {
+        width: 58.33333333%;
+    }
+
+    .col-lg-6 {
+        width: 50%;
+    }
+
+    .col-lg-5 {
+        width: 41.66666667%;
+    }
+
+    .col-lg-4 {
+        width: 33.33333333%;
+    }
+
+    .col-lg-3 {
+        width: 25%;
+    }
+
+    .col-lg-2 {
+        width: 16.66666667%;
+    }
+
+    .col-lg-1 {
+        width: 8.33333333%;
+    }
+
+    .col-lg-pull-12 {
+        right: 100%;
+    }
+
+    .col-lg-pull-11 {
+        right: 91.66666667%;
+    }
+
+    .col-lg-pull-10 {
+        right: 83.33333333%;
+    }
+
+    .col-lg-pull-9 {
+        right: 75%;
+    }
+
+    .col-lg-pull-8 {
+        right: 66.66666667%;
+    }
+
+    .col-lg-pull-7 {
+        right: 58.33333333%;
+    }
+
+    .col-lg-pull-6 {
+        right: 50%;
+    }
+
+    .col-lg-pull-5 {
+        right: 41.66666667%;
+    }
+
+    .col-lg-pull-4 {
+        right: 33.33333333%;
+    }
+
+    .col-lg-pull-3 {
+        right: 25%;
+    }
+
+    .col-lg-pull-2 {
+        right: 16.66666667%;
+    }
+
+    .col-lg-pull-1 {
+        right: 8.33333333%;
+    }
+
+    .col-lg-pull-0 {
+        right: auto;
+    }
+
+    .col-lg-push-12 {
+        left: 100%;
+    }
+
+    .col-lg-push-11 {
+        left: 91.66666667%;
+    }
+
+    .col-lg-push-10 {
+        left: 83.33333333%;
+    }
+
+    .col-lg-push-9 {
+        left: 75%;
+    }
+
+    .col-lg-push-8 {
+        left: 66.66666667%;
+    }
+
+    .col-lg-push-7 {
+        left: 58.33333333%;
+    }
+
+    .col-lg-push-6 {
+        left: 50%;
+    }
+
+    .col-lg-push-5 {
+        left: 41.66666667%;
+    }
+
+    .col-lg-push-4 {
+        left: 33.33333333%;
+    }
+
+    .col-lg-push-3 {
+        left: 25%;
+    }
+
+    .col-lg-push-2 {
+        left: 16.66666667%;
+    }
+
+    .col-lg-push-1 {
+        left: 8.33333333%;
+    }
+
+    .col-lg-push-0 {
+        left: auto;
+    }
+
+    .col-lg-offset-12 {
+        margin-left: 100%;
+    }
+
+    .col-lg-offset-11 {
+        margin-left: 91.66666667%;
+    }
+
+    .col-lg-offset-10 {
+        margin-left: 83.33333333%;
+    }
+
+    .col-lg-offset-9 {
+        margin-left: 75%;
+    }
+
+    .col-lg-offset-8 {
+        margin-left: 66.66666667%;
+    }
+
+    .col-lg-offset-7 {
+        margin-left: 58.33333333%;
+    }
+
+    .col-lg-offset-6 {
+        margin-left: 50%;
+    }
+
+    .col-lg-offset-5 {
+        margin-left: 41.66666667%;
+    }
+
+    .col-lg-offset-4 {
+        margin-left: 33.33333333%;
+    }
+
+    .col-lg-offset-3 {
+        margin-left: 25%;
+    }
+
+    .col-lg-offset-2 {
+        margin-left: 16.66666667%;
+    }
+
+    .col-lg-offset-1 {
+        margin-left: 8.33333333%;
+    }
+
+    .col-lg-offset-0 {
+        margin-left: 0%;
+    }
+}
+
+/*
+        **
+        **  Custom Common Styles
+        **
+        */
+
+.flex {
+    display: flex;
+    -webkit-display: -webkit-box;
+    -webkit-display: -webkit-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+}
+
+.flex-direction-column {
+    flex-direction: column;
+}
+
+.flex-grow {
+    flex-grow: 1;
+    max-width: 100%;
+}
+
+.flex-shrink {
+    flex-shrink: 1;
+    min-width: 8.33%;
+}
+
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.mb-30 {
+    margin-bottom: 30px;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mt-30 {
+    margin-top: 30px;
+}
+
+html {
+    width: 100%;
+}
+
+body {
+    background-color: #fff;
+    font: normal 12px Helvetica, Arial, sans-serif;
+    line-height: normal;
+    color: #000000;
+    margin: 5px 0;
+    -webkit-text-size-adjust: 100%;
+}
+
+#wrapper {
+    min-width: 720px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.small {
+    font-size: 10px;
+}
+
+.small-underline {
+    font-size: 10px;
+    text-decoration: underline;
+}
+
+    .small-underline.left-padding {
+        padding-left: 5px;
+    }
+
+.small-overline {
+    font-size: 10px;
+    text-decoration: overline;
+}
+
+.small-under-over-line {
+    font-size: 10px;
+    text-decoration: underline overline;
+}
+
+strong,
+.bold {
+    font-weight: 600;
+}
+
+.normal {
+    font-weight: 400;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.text-top {
+    vertical-align: text-top !important;
+}
+
+.text-centered {
+    text-align: center;
+}
+
+.border-bottom {
+    border-bottom: #d9d9d9 solid 1px;
+}
+
+.border-right {
+    border-right: 1px solid #d9d9d9;
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+.pre-wrap {
+    white-space: pre-wrap;
+}
+
+.break-word {
+    overflow-wrap: anywhere;
+}
+
+.word-wrap {
+    word-wrap: break-word;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.no-padding-left {
+    padding-left: 0 !important;
+}
+
+.text-transform-none {
+    text-transform: none;
+}
+
+section {
+    padding: 6px 0;
+    /*overflow: hidden;*/
+}
+
+.dotted-line {
+    border-bottom: 1px dashed black;
+    margin-top: -1px;
+}
+
+.writing-line {
+    border-bottom: 1px solid #e5e5e5;
+    height: 24px;
+    display: flex;
+    -webkit-display: -webkit-box;
+    -webkit-display: -webkit-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    align-items: center;
+}
+
+hr,
+.hr {
+    border-bottom-color: #d9d9d9;
+    border-top: none;
+    margin: 0;
+}
+
+.hr {
+    width: 100%;
+    height: 0.01px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left: none;
+    border-right: none;
+}
+
+.background-green {
+    background-color: #7bc34e;
+}
+
+.background-red {
+    background-color: #e74c3c;
+}
+
+
+table.show-borders td,
+tr.show-borders th {
+    padding: 3px 5px;
+    border-right: 1px solid #d9d9d9;
+}
+
+    table.show-borders td:first-child,
+    tr.show-borders th:first-child {
+        padding-left: 0;
+    }
+
+    table.show-borders td:last-child,
+    tr.show-borders th:last-child {
+        border-right: none;
+    }
+
+thead tr:not(.no-border),
+tbody tr:not(.no-border),
+tfoot tr:not(.no-border) {
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.condensed tbody td {
+    padding: 4px;
+}
+
+tbody td {
+    padding: 4px 5px;
+}
+
+    tbody td.tall {
+        padding: 14px 4px;
+    }
+
+    tbody td:last-child {
+        padding-right: 0;
+    }
+
+    tbody td:first-child {
+        padding-left: 0;
+        text-align: left;
+    }
+
+table.show-borders .no-border {
+    border: none;
+}
+
+
+table thead:not(:first-child) tr th {
+    padding-top: 10px;
+}
+
+table.no-padding-bottom-table tbody tr td {
+    padding-bottom: 0px;
+}
+
+
+table.no-border-table tbody tr {
+    border: none;
+}
+
+table.last-col-bold tr td:last-child {
+    font-weight: 600;
+}
+
+table.show-borders2 td:nth-child(2n):not(:last-child) {
+    border-right: 1px solid #d9d9d9;
+}
+
+table.alt-checks.alt-checks-vertical-lines th:not(:last-child),
+table.alt-checks.alt-checks-vertical-lines td:not(:last-child) {
+    border-right: 1px solid #d9d9d9;
+}
+
+thead th,
+.sub-header {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 4px;
+    text-transform: uppercase;
+}
+
+    .sub-header td {
+        padding-top: 10px !important;
+    }
+
+        .sub-header td .normal {
+            font-weight: 400;
+        }
+
+    thead th:first-child,
+    tfoot td:first-child {
+        padding-left: 0;
+        text-align: left;
+    }
+
+        thead th:first-child.text-centered,
+        .text-centered {
+            text-align: center;
+        }
+
+    thead th:last-child,
+    thead.multi-row th:last-child {
+        padding-right: 0;
+    }
+
+thead.multi-row tr th {
+    padding: 0 4px;
+}
+
+    thead.multi-row tr th:first-child {
+        padding: 0 4px 0 0;
+    }
+
+thead.multi-row tr:not(:last-child) {
+    border-bottom: none;
+}
+
+thead.multi-row tr:last-child th {
+    padding-bottom: 4px;
+}
+
+
+.winds-aloft-footer-cell {
+    white-space: normal;
+    font-size: 10px;
+}
+
+h1 {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.date-created {
+    margin-left: 0; /* fixes column alignment offset */
+}
+
+.raim-icon {
+    position: relative;
+    top: 1px;
+    width: 12px;
+}
+
+.raim-error-icon {
+    height: 13px;
+}
+
+.raim-check-icon {
+    width: 14px;
+}
+
+.airport-wrapper {
+    display: block;
+}
+
+.airport-label-container {
+    padding-bottom: 4px;
+}
+
+.airport-image-container {
+    padding: 1px 0;
+}
+
+.airport-diagrams-table thead {
+    display: table-row-group;
+}
+
+.airport-diagrams-table th .airport-label {
+    font-weight: normal;
+}
+
+.airport-image {
+    width: 100%;
+    margin: auto 0;
+}
+
+.table-data-row {
+    page-break-inside: avoid;
+}
+
+    .table-data-row td:first-child {
+        text-align: left;
+    }
+
+        .table-data-row td:first-child.text-centered {
+            text-align: center;
+        }
+
+.performance-summary {
+    padding: 0 10px;
+}
+
+.summary-times {
+    table-layout: fixed;
+}
+
+.info {
+    table-layout: fixed;
+}
+
+.performance-metric strong {
+    display: block;
+    white-space: nowrap;
+}
+
+.performance-metric {
+    padding: 6px 6px 6px 0;
+}
+
+.error {
+    color: #e74c3c;
+    font-weight: 600;
+}
+
+.success {
+    color: #7bc34e;
+}
+
+.notice {
+    color: #666;
+    font-size: 12px;
+    display: inline-block;
+}
+
+table.etp-table tbody td:first-child {
+    text-align: left;
+}
+
+.etp-report th:first-child {
+    width: 50%;
+}
+
+.green {
+    color: green;
+}
+
+.purple {
+    color: mediumvioletred;
+}
+
+.red {
+    color: red;
+}
+
+.blue {
+    color: mediumblue;
+}
+
+.actual {
+    width: 4rem;
+}
+
+.min-width100 {
+    min-width: 100px;
+}
+
+.no-border {
+    border-bottom: none;
+}
+
+.right-border {
+    border-right: 1px solid #d9d9d9;
+}
+
+.width1 {
+    width: 1px;
+}
+
+.max-width100 {
+    max-width: 100px;
+}
+
+.min-width50 {
+    min-width: 50px;
+}
+
+.min-width45 {
+    min-width: 45px;
+}
+
+.noteText {
+    font-size: 10px;
+}
+
+
+.marginMinus10 {
+    margin-right: -10px;
+    margin-left: -10px;
+}
+
+.paddingPlus10 {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.dashedOutline {
+    outline: 1px black dashed;
+    display: inline-block;
+}
+
+.enroute-charge {
+    max-width: 80px;
+}
+
+.column-max-width-fixedsmall {
+    max-width: 2rem;
+}
+
+.column-max-width-fixedmedium {
+    max-width: 3rem;
+}
+
+.column-max-width-fixedlarge {
+    max-width: 4rem;
+}
+
+/* Dark Styles */
+@media not print {
+    .dark {
+        background-color: #132230;
+        color: rgba(255, 255, 255, 0.88);
+    }
+
+        .dark .airport-image-container {
+            background: #000;
+        }
+
+        .dark table.show-borders td,
+        .dark tr.show-borders th,
+        .dark thead tr,
+        .dark tbody tr,
+        .dark table.way-point tbody tr:nth-child(3n),
+        .dark .border-right,
+        .dark .border-bottom,
+        .dark .writing-line,
+        .dark .hr {
+            border-color: #2b3945;
+        }
+
+        .dark img:not(.raim-icon) {
+            filter: invert(100%);
+        }
+}
+
+/* Print Styles */
+.dont-break-container {
+    page-break-inside: avoid;
+}
+#wrapper {
+    max-width: 1100px;
+}
+
+.summary-times td:first-child {
+    min-width: 90px;
+}
+
+.notes td:first-child {
+    width: 80px;
+}
+        </style>
+</head>
+<body>
+    <div id="wrapper">
+        <div class="container-fluid">
+
+
+<section class="row section navlog-header">
+    <div class="col-xs-9 flight-summary">
+        <strong>
+            ENGK &mdash; ENGK (Feb 12, 2025) in SELZI (C172 - 172S Skyhawk) VFR
+        </strong>
+        <div class="perf-summary">
+            <span>Full Power - 60% Load @ FL85 - 500 FPM</span>
+        </div>
+    </div>
+    <div class="col-xs-3 text-right">
+        <div class="date-created">
+            Created Feb 11 2025 1913Z
+        </div>
+
+                <div class="date-created">
+                    Winds Feb 11 2025 1200Z
+                </div>
+    </div>
+
+</section>
+
+
+            <div class="hr"></div>
+
+
+<section class="row section performance-summary">
+    <table>
+			<tbody>
+			<tr class="no-border">
+				<td class="performance-metric ete">
+					<strong>ETE</strong>
+					<span>1h44m</span>
+				</td>
+				<td class="performance-metric distance">
+					<strong>Distance</strong>
+					<span>182NM</span>
+				</td>
+				<td class="performance-metric avg-wind">
+					<strong>Avg Wind</strong>
+					<span class="no-wrap">1kt tail (063&#xB0;/011)</span>
+				</td>
+				<td class="performance-metric etd">
+					<strong>ETD</strong>
+					<span>15:15 CET / 1415Z</span>
+				</td>
+				<td class="performance-metric eta">
+					<strong>ETA</strong>
+					<span>16:59 CET / 1559Z</span>
+				</td>
+
+					<td class="performance-metric tow">
+						<strong>TOW</strong>
+						<span class="">982 kg</span>
+					</td>
+					<td class="performance-metric elw">
+						<strong>ELW</strong>
+						<span class="">952 kg</span>
+					</td>
+					<td class="performance-metric empty">
+						<strong></strong>
+						<span></span>
+					</td>
+			</tr>
+
+				<tr class="no-border">
+					<td class="performance-metric block-fuel">
+						<strong>Block Fuel</strong>
+						<span class="">24.6 g</span>
+					</td>
+					<td class="performance-metric taxi-fuel">
+						<strong>Taxi Fuel</strong>
+						<span>1.2 g</span>
+					</td>
+					<td class="performance-metric flight-fuel">
+						<strong>Flight Fuel</strong>
+						<span class="no-wrap">10.8 g</span>
+					</td>
+					<td class="performance-metric reserve-fuel">
+						<strong>Reserve Fuel</strong>
+						<span>4.9 g</span>
+					</td>
+
+
+						<td class="performance-metric contingency-fuel">
+							<strong>Contingency Fuel</strong>
+							<span>1.0 g</span>
+						</td>
+
+					<td class="performance-metric alternate-fuel">
+						<strong>Alternate Fuel</strong>
+						<span>2.9 g</span>
+					</td>
+					<td class="performance-metric extra-fuel">
+						<strong>Extra Fuel</strong>
+						<span>5.0 g</span>
+					</td>
+					<td class="performance-metric landing-fuel">
+						<strong>Landing Fuel</strong>
+						<span>13.8 g</span>
+					</td>
+
+				</tr>
+
+
+		</tbody>
+    </table>
+</section>
+            <div class="hr"></div>
+
+
+
+
+            <section class="row section">
+                <div class="col-xs-8">
+
+
+<section class="row section route">
+    <div class="col-xs-12">
+        <strong>Route</strong>
+        <div>
+            GKJOM 5846N00829E 5902N00831E 5920N00831E 5929N00838E 5944N00824E 5949N00839E NOSAU LUBA MUNKE KILEB 5859N00912E 5853N00902E 5846N00852E GKNES GKEIV
+        </div>
+    </div>
+
+</section>
+                </div>
+                <div class="col-xs-4">
+
+
+<section class="row section raim">
+</section>
+                </div>
+            </section>
+            <div class="hr"></div>
+
+
+    <section>
+        <table class="waypoint mt-10 show-borders text-centered condensed no-wrap">
+            <thead class="multi-row">
+                <tr style="display:none">
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                </tr>
+                <tr class="table-header-row row1">
+                    <th colspan="2"></th>
+                    <th colspan="2">MAG</th>
+                    <th></th>
+                    <th colspan="2">WIND</th>
+                    <th></th>
+                    <th colspan="2">SPD KT</th>
+                    <th colspan="2">DIST NM</th>
+                        <th colspan="2">FUEL G</th>
+                        <th></th>
+                    <th colspan="3">TIME</th>
+                    <th></th>
+                </tr>
+                <tr class="table-header-row row2">
+                    <th class="border-right waypoint-column no-border">Waypoint</th>
+                    <th class="border-right">Airway</th>
+                    <th>HDG</th>
+                    <th class="border-right no-padding-left">CRS</th>
+                    <th class="border-right">ALT</th>
+                    <th>CMP</th>
+                    <th class="border-right no-padding-left">DIR/SPD</th>
+                    <th class="border-right">ISA</th>
+                    <th>TAS</th>
+                    <th class="border-right no-padding-left">GS</th>
+                    <th>LEG</th>
+                    <th class="border-right no-padding-left">REM</th>
+                        <th>USED</th>
+                        <th>REM</th>
+                        <th class="border-right actual min-width50">ACT</th>
+                    <th>LEG</th>
+                    <th>REM</th>
+                    <th class="border-right no-padding-left">ETE</th>
+                    <th class="actual min-width50">ACT</th>
+                </tr>
+            </thead>
+
+
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td>
+                            ENGK
+                        </td>
+                    <td></td>
+                    <td class="no-padding-left">-</td>
+                    <td>-</td>
+                    <td>415</td>
+                    <td class="no-border">-</td>
+                    <td class="no-padding-left">-</td>
+                    <td>-13</td>
+                    <td class="no-border">-</td>
+                    <td class="no-padding-left">-</td>
+                    <td class="no-border">-</td>
+                    <td class="no-padding-left">182</td>
+                        <td class="no-border">1.2</td>
+                        <td>23.4</td>
+                        <td></td>
+                    <td class="no-border">-</td>
+                    <td class="no-border no-padding-left">1:44</td>
+                    <td class="no-padding-left">-</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td rowspan="1">
+                            JOM&#xC5;S<br />
+                            <span class="small">
+                                GKJOM
+                            </span>
+                        </td>
+                    <td>DCT</td>
+                    <td class="no-padding-left">336</td>
+                    <td>327</td>
+                    <td>3800</td>
+                    <td class="no-border">T1</td>
+                    <td class="no-padding-left">061/012</td>
+                    <td>-14</td>
+                    <td class="no-border">75</td>
+                    <td class="no-padding-left">76</td>
+                    <td class="no-border">6</td>
+                    <td class="no-padding-left">176</td>
+                        <td class="no-border">1.8</td>
+                        <td>22.8</td>
+                        <td></td>
+                    <td class="no-border">0:04</td>
+                    <td class="no-border no-padding-left">1:40</td>
+                    <td class="no-padding-left">0:04</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td>
+                            -TOC-
+                        </td>
+                    <td>DCT</td>
+                    <td class="no-padding-left">344</td>
+                    <td>334</td>
+                    <td>FL85</td>
+                    <td class="no-border">T3</td>
+                    <td class="no-padding-left">074/015</td>
+                    <td>-9</td>
+                    <td class="no-border">83</td>
+                    <td class="no-padding-left">86</td>
+                    <td class="no-border">8</td>
+                    <td class="no-padding-left">168</td>
+                        <td class="no-border">2.7</td>
+                        <td>21.9</td>
+                        <td></td>
+                    <td class="no-border">0:06</td>
+                    <td class="no-border no-padding-left">1:34</td>
+                    <td class="no-padding-left">0:10</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td>
+                            5846N00829E
+                        </td>
+                    <td>DCT</td>
+                    <td class="no-padding-left">341</td>
+                    <td>334</td>
+                    <td>FL85</td>
+                    <td class="no-border">T1</td>
+                    <td class="no-padding-left">074/014</td>
+                    <td>-7</td>
+                    <td class="no-border">110</td>
+                    <td class="no-padding-left">110</td>
+                    <td class="no-border">3</td>
+                    <td class="no-padding-left">165</td>
+                        <td class="no-border">2.8</td>
+                        <td>21.8</td>
+                        <td></td>
+                    <td class="no-border">0:02</td>
+                    <td class="no-border no-padding-left">1:32</td>
+                    <td class="no-padding-left">0:12</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td>
+                            5902N00831E
+                        </td>
+                    <td>DCT</td>
+                    <td class="no-padding-left">005</td>
+                    <td>358</td>
+                    <td>FL85</td>
+                    <td class="no-border">H5</td>
+                    <td class="no-padding-left">073/014</td>
+                    <td>-7</td>
+                    <td class="no-border">110</td>
+                    <td class="no-padding-left">104</td>
+                    <td class="no-border">16</td>
+                    <td class="no-padding-left">149</td>
+                        <td class="no-border">3.6</td>
+                        <td>21.1</td>
+                        <td></td>
+                    <td class="no-border">0:09</td>
+                    <td class="no-border no-padding-left">1:23</td>
+                    <td class="no-padding-left">0:21</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td>
+                            5920N00831E
+                        </td>
+                    <td>DCT</td>
+                    <td class="no-padding-left">002</td>
+                    <td>356</td>
+                    <td>FL85</td>
+                    <td class="no-border">H5</td>
+                    <td class="no-padding-left">068/012</td>
+                    <td>-7</td>
+                    <td class="no-border">110</td>
+                    <td class="no-padding-left">104</td>
+                    <td class="no-border">18</td>
+                    <td class="no-padding-left">131</td>
+                        <td class="no-border">4.3</td>
+                        <td>20.2</td>
+                        <td></td>
+                    <td class="no-border">0:10</td>
+                    <td class="no-border no-padding-left">1:13</td>
+                    <td class="no-padding-left">0:31</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td>
+                            5929N00838E
+                        </td>
+                    <td>DCT</td>
+                    <td class="no-padding-left">021</td>
+                    <td>017</td>
+                    <td>FL85</td>
+                    <td class="no-border">H9</td>
+                    <td class="no-padding-left">062/011</td>
+                    <td>-7</td>
+                    <td class="no-border">110</td>
+                    <td class="no-padding-left">101</td>
+                    <td class="no-border">10</td>
+                    <td class="no-padding-left">121</td>
+                        <td class="no-border">4.9</td>
+                        <td>19.7</td>
+                        <td></td>
+                    <td class="no-border">0:06</td>
+                    <td class="no-border no-padding-left">1:07</td>
+                    <td class="no-padding-left">0:37</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td>
+                            5944N00824E
+                        </td>
+                    <td>DCT</td>
+                    <td class="no-padding-left">336</td>
+                    <td>330</td>
+                    <td>FL85</td>
+                    <td class="no-border">H2</td>
+                    <td class="no-padding-left">058/010</td>
+                    <td>-7</td>
+                    <td class="no-border">110</td>
+                    <td class="no-padding-left">108</td>
+                    <td class="no-border">16</td>
+                    <td class="no-padding-left">105</td>
+                        <td class="no-border">5.6</td>
+                        <td>19.0</td>
+                        <td></td>
+                    <td class="no-border">0:09</td>
+                    <td class="no-border no-padding-left">0:58</td>
+                    <td class="no-padding-left">0:46</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td>
+                            5949N00839E
+                        </td>
+                    <td>DCT</td>
+                    <td class="no-padding-left">050</td>
+                    <td>051</td>
+                    <td>FL85</td>
+                    <td class="no-border">H10</td>
+                    <td class="no-padding-left">051/010</td>
+                    <td>-7</td>
+                    <td class="no-border">110</td>
+                    <td class="no-padding-left">100</td>
+                    <td class="no-border">9</td>
+                    <td class="no-padding-left">96</td>
+                        <td class="no-border">6.1</td>
+                        <td>18.5</td>
+                        <td></td>
+                    <td class="no-border">0:06</td>
+                    <td class="no-border no-padding-left">0:52</td>
+                    <td class="no-padding-left">0:52</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td rowspan="1">
+                            SAULAND<br />
+                            <span class="small">
+                                NOSAU
+                            </span>
+                        </td>
+                    <td>DCT</td>
+                    <td class="no-padding-left">135</td>
+                    <td>140</td>
+                    <td>FL85</td>
+                    <td class="no-border">H0</td>
+                    <td class="no-padding-left">050/010</td>
+                    <td>-7</td>
+                    <td class="no-border">110</td>
+                    <td class="no-padding-left">110</td>
+                    <td class="no-border">16</td>
+                    <td class="no-padding-left">80</td>
+                        <td class="no-border">6.8</td>
+                        <td>17.8</td>
+                        <td></td>
+                    <td class="no-border">0:08</td>
+                    <td class="no-border no-padding-left">0:44</td>
+                    <td class="no-padding-left">1:00</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td rowspan="1">
+                            B&#xD8;<br />
+                            <span class="small">
+                                LUBA
+                            </span>
+                        </td>
+                    <td>DCT</td>
+                    <td class="no-padding-left">154</td>
+                    <td>159</td>
+                    <td>FL85</td>
+                    <td class="no-border">T2</td>
+                    <td class="no-padding-left">056/010</td>
+                    <td>-7</td>
+                    <td class="no-border">110</td>
+                    <td class="no-padding-left">112</td>
+                    <td class="no-border">12</td>
+                    <td class="no-padding-left">68</td>
+                        <td class="no-border">7.3</td>
+                        <td>17.3</td>
+                        <td></td>
+                    <td class="no-border">0:07</td>
+                    <td class="no-border no-padding-left">0:37</td>
+                    <td class="no-padding-left">1:07</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td rowspan="1">
+                            MUNKEN<br />
+                            <span class="small">
+                                MUNKE
+                            </span>
+                        </td>
+                    <td>DCT</td>
+                    <td class="no-padding-left">124</td>
+                    <td>130</td>
+                    <td>FL85</td>
+                    <td class="no-border">H3</td>
+                    <td class="no-padding-left">060/011</td>
+                    <td>-7</td>
+                    <td class="no-border">110</td>
+                    <td class="no-padding-left">106</td>
+                    <td class="no-border">15</td>
+                    <td class="no-padding-left">53</td>
+                        <td class="no-border">8.0</td>
+                        <td>16.6</td>
+                        <td></td>
+                    <td class="no-border">0:08</td>
+                    <td class="no-border no-padding-left">0:29</td>
+                    <td class="no-padding-left">1:15</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td rowspan="1">
+                            KILEBYGDA<br />
+                            <span class="small">
+                                KILEB
+                            </span>
+                        </td>
+                    <td>DCT</td>
+                    <td class="no-padding-left">168</td>
+                    <td>173</td>
+                    <td>FL85</td>
+                    <td class="no-border">T4</td>
+                    <td class="no-padding-left">061/011</td>
+                    <td>-7</td>
+                    <td class="no-border">110</td>
+                    <td class="no-padding-left">114</td>
+                    <td class="no-border">8</td>
+                    <td class="no-padding-left">45</td>
+                        <td class="no-border">8.3</td>
+                        <td>16.3</td>
+                        <td></td>
+                    <td class="no-border">0:04</td>
+                    <td class="no-border no-padding-left">0:25</td>
+                    <td class="no-padding-left">1:19</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td>
+                            5859N00912E
+                        </td>
+                    <td>DCT</td>
+                    <td class="no-padding-left">215</td>
+                    <td>217</td>
+                    <td>FL85</td>
+                    <td class="no-border">T11</td>
+                    <td class="no-padding-left">063/011</td>
+                    <td>-7</td>
+                    <td class="no-border">110</td>
+                    <td class="no-padding-left">120</td>
+                    <td class="no-border">11</td>
+                    <td class="no-padding-left">34</td>
+                        <td class="no-border">8.7</td>
+                        <td>15.8</td>
+                        <td></td>
+                    <td class="no-border">0:06</td>
+                    <td class="no-border no-padding-left">0:19</td>
+                    <td class="no-padding-left">1:25</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td>
+                            -TOD-
+                        </td>
+                    <td>DCT</td>
+                    <td class="no-padding-left">215</td>
+                    <td>217</td>
+                    <td>FL85</td>
+                    <td class="no-border">T11</td>
+                    <td class="no-padding-left">064/012</td>
+                    <td>-7</td>
+                    <td class="no-border">110</td>
+                    <td class="no-padding-left">120</td>
+                    <td class="no-border">7</td>
+                    <td class="no-padding-left">27</td>
+                        <td class="no-border">9.0</td>
+                        <td>15.5</td>
+                        <td></td>
+                    <td class="no-border">0:03</td>
+                    <td class="no-border no-padding-left">0:16</td>
+                    <td class="no-padding-left">1:28</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td>
+                            5853N00902E
+                        </td>
+                    <td>DCT</td>
+                    <td class="no-padding-left">214</td>
+                    <td>218</td>
+                    <td>FL81</td>
+                    <td class="no-border">T11</td>
+                    <td class="no-padding-left">066/013</td>
+                    <td>-7</td>
+                    <td class="no-border">90</td>
+                    <td class="no-padding-left">101</td>
+                    <td class="no-border">1</td>
+                    <td class="no-padding-left">26</td>
+                        <td class="no-border">9.0</td>
+                        <td>15.5</td>
+                        <td></td>
+                    <td class="no-border">0:01</td>
+                    <td class="no-border no-padding-left">0:15</td>
+                    <td class="no-padding-left">1:29</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td>
+                            5846N00852E
+                        </td>
+                    <td>DCT</td>
+                    <td class="no-padding-left">208</td>
+                    <td>212</td>
+                    <td>5500</td>
+                    <td class="no-border">T11</td>
+                    <td class="no-padding-left">067/013</td>
+                    <td>-8</td>
+                    <td class="no-border">90</td>
+                    <td class="no-padding-left">101</td>
+                    <td class="no-border">9</td>
+                    <td class="no-padding-left">17</td>
+                        <td class="no-border">9.8</td>
+                        <td>14.9</td>
+                        <td></td>
+                    <td class="no-border">0:05</td>
+                    <td class="no-border no-padding-left">0:10</td>
+                    <td class="no-padding-left">1:34</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td rowspan="1">
+                            NESVERK<br />
+                            <span class="small">
+                                GKNES
+                            </span>
+                        </td>
+                    <td>DCT</td>
+                    <td class="no-padding-left">171</td>
+                    <td>178</td>
+                    <td>3200</td>
+                    <td class="no-border">T7</td>
+                    <td class="no-padding-left">064/014</td>
+                    <td>-10</td>
+                    <td class="no-border">91</td>
+                    <td class="no-padding-left">99</td>
+                    <td class="no-border">8</td>
+                    <td class="no-padding-left">9</td>
+                        <td class="no-border">10.2</td>
+                        <td>14.4</td>
+                        <td></td>
+                    <td class="no-border">0:05</td>
+                    <td class="no-border no-padding-left">0:05</td>
+                    <td class="no-padding-left">1:39</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td rowspan="1">
+                            EIVINDSTAD<br />
+                            <span class="small">
+                                GKEIV
+                            </span>
+                        </td>
+                    <td>DCT</td>
+                    <td class="no-padding-left">223</td>
+                    <td>224</td>
+                    <td>1000</td>
+                    <td class="no-border">T13</td>
+                    <td class="no-padding-left">056/012</td>
+                    <td>-14</td>
+                    <td class="no-border">90</td>
+                    <td class="no-padding-left">103</td>
+                    <td class="no-border">7</td>
+                    <td class="no-padding-left">2</td>
+                        <td class="no-border">10.7</td>
+                        <td>13.9</td>
+                        <td></td>
+                    <td class="no-border">0:04</td>
+                    <td class="no-border no-padding-left">0:01</td>
+                    <td class="no-padding-left">1:43</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td>
+                            ENGK
+                        </td>
+                    <td>DCT</td>
+                    <td class="no-padding-left">134</td>
+                    <td>141</td>
+                    <td>415</td>
+                    <td class="no-border">H0</td>
+                    <td class="no-padding-left">054/010</td>
+                    <td>-16</td>
+                    <td class="no-border">90</td>
+                    <td class="no-padding-left">90</td>
+                    <td class="no-border">2</td>
+                    <td class="no-padding-left">-</td>
+                        <td class="no-border">10.8</td>
+                        <td>13.8</td>
+                        <td></td>
+                    <td class="no-border">0:01</td>
+                    <td class="no-border no-padding-left">-</td>
+                    <td class="no-padding-left">1:44</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+
+
+
+                <tbody class="dont-break-container">
+                    <tr class="sub-header">
+                        <td title="Alternate 1 Route" class="text-left" id="alternateRoute" colspan="19">
+                            Alternate #1 ENCN / Route: DCT
+                                <br />
+                                <div class="normal">
+                                    <span>Cruise profile: 60% Load @ FL50</span>
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td>
+                            ENGK
+                        </td>
+                    <td></td>
+                    <td class="no-padding-left">-</td>
+                    <td>-</td>
+                    <td>400</td>
+                    <td class="no-border">-</td>
+                    <td class="no-padding-left">-</td>
+                    <td>-13</td>
+                    <td class="no-border">-</td>
+                    <td class="no-padding-left">-</td>
+                    <td class="no-border">-</td>
+                    <td class="no-padding-left">42</td>
+                        <td class="no-border">-</td>
+                        <td>13.8</td>
+                        <td></td>
+                    <td class="no-border">-</td>
+                    <td class="no-border no-padding-left">0:24</td>
+                    <td class="no-padding-left">-</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td>
+                            -TOC-
+                        </td>
+                    <td>DCT</td>
+                    <td class="no-padding-left">288</td>
+                    <td>282</td>
+                    <td>5000</td>
+                    <td class="no-border">T9</td>
+                    <td class="no-padding-left">061/012</td>
+                    <td>-13</td>
+                    <td class="no-border">75</td>
+                    <td class="no-padding-left">84</td>
+                    <td class="no-border">8</td>
+                    <td class="no-padding-left">34</td>
+                        <td class="no-border">0.9</td>
+                        <td>12.9</td>
+                        <td></td>
+                    <td class="no-border">0:05</td>
+                    <td class="no-border no-padding-left">0:19</td>
+                    <td class="no-padding-left">0:05</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td>
+                            APPCH
+                        </td>
+                    <td>DCT</td>
+                    <td class="no-padding-left">286</td>
+                    <td>281</td>
+                    <td>5000</td>
+                    <td class="no-border">T12</td>
+                    <td class="no-padding-left">069/015</td>
+                    <td>-10</td>
+                    <td class="no-border">107</td>
+                    <td class="no-padding-left">119</td>
+                    <td class="no-border">7</td>
+                    <td class="no-padding-left">27</td>
+                        <td class="no-border">1.2</td>
+                        <td>12.5</td>
+                        <td></td>
+                    <td class="no-border">0:04</td>
+                    <td class="no-border no-padding-left">0:15</td>
+                    <td class="no-padding-left">0:09</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td>
+                            -TOD-
+                        </td>
+                    <td>DCT</td>
+                    <td class="no-padding-left">153</td>
+                    <td>162</td>
+                    <td>5000</td>
+                    <td class="no-border">T1</td>
+                    <td class="no-padding-left">069/015</td>
+                    <td>-10</td>
+                    <td class="no-border">107</td>
+                    <td class="no-padding-left">108</td>
+                    <td class="no-border">11</td>
+                    <td class="no-padding-left">16</td>
+                        <td class="no-border">1.8</td>
+                        <td>11.9</td>
+                        <td></td>
+                    <td class="no-border">0:06</td>
+                    <td class="no-border no-padding-left">0:09</td>
+                    <td class="no-padding-left">0:15</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td>
+                            APPCH
+                        </td>
+                    <td>DCT</td>
+                    <td class="no-padding-left">151</td>
+                    <td>162</td>
+                    <td>4000</td>
+                    <td class="no-border">T3</td>
+                    <td class="no-padding-left">072/016</td>
+                    <td>-10</td>
+                    <td class="no-border">90</td>
+                    <td class="no-padding-left">93</td>
+                    <td class="no-border">3</td>
+                    <td class="no-padding-left">13</td>
+                        <td class="no-border">2.1</td>
+                        <td>11.7</td>
+                        <td></td>
+                    <td class="no-border">0:02</td>
+                    <td class="no-border no-padding-left">0:07</td>
+                    <td class="no-padding-left">0:17</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+        <tbody class="dont-break-container">
+            <tr class="table-data-row">
+                        <td>
+                            ENCN
+                        </td>
+                    <td>DCT</td>
+                    <td class="no-padding-left">218</td>
+                    <td>222</td>
+                    <td>57</td>
+                    <td class="no-border">T14</td>
+                    <td class="no-padding-left">066/015</td>
+                    <td>-14</td>
+                    <td class="no-border">90</td>
+                    <td class="no-padding-left">104</td>
+                    <td class="no-border">13</td>
+                    <td class="no-padding-left">-</td>
+                        <td class="no-border">3.0</td>
+                        <td>10.9</td>
+                        <td></td>
+                    <td class="no-border">0:07</td>
+                    <td class="no-border no-padding-left">-</td>
+                    <td class="no-padding-left">0:24</td>
+                    <td></td>
+            </tr>
+
+        </tbody>
+
+
+        </table>
+    </section>
+
+
+
+
+    <section class="section">
+            <table class="winds-aloft show-borders no-wrap mt-10">
+                <thead class="multi-row">
+                    <tr class="table-header-row row1 text-centered">
+                        <th></th>
+                            <th colspan="2">5000 ft (ISA: 5°C)</th>
+                            <th colspan="2">FL 70 (ISA: 1°C)</th>
+                            <th colspan="2">FL 90 (ISA: -3°C)</th>
+                            <th colspan="2">FL 110 (ISA: -7°C)</th>
+                            <th colspan="2">FL 130 (ISA: -11°C)</th>
+                    </tr>
+                    <tr class="table-header-row row2">
+                        <th class="border-right">Winds Aloft</th>
+                                <th>(COMP) WIND</th>
+                                <th class="border-right">ISA</th>
+                                <th>(COMP) WIND</th>
+                                <th class="border-right">ISA</th>
+                                <th>(COMP) WIND</th>
+                                <th class="border-right">ISA</th>
+                                <th>(COMP) WIND</th>
+                                <th class="border-right">ISA</th>
+                                <th>(COMP) WIND</th>
+                                <th>ISA</th>
+                    </tr>
+                </thead>
+                        <tbody class="dont-break-container">
+                            <tr class="table-data-row">
+                                <td>GKJOM</td>
+                                    <td class="no-border">(H1) 062/013</td>
+                                    <td>-10</td>
+                                    <td class="no-border">(T1) 070/012</td>
+                                    <td>-8</td>
+                                    <td class="no-border">(T1) 069/012</td>
+                                    <td>-6</td>
+                                    <td class="no-border">(T1) 068/012</td>
+                                    <td>-5</td>
+                                    <td class="no-border">(T1) 069/013</td>
+                                    <td>-5</td>
+                            </tr>
+                        </tbody>
+                        <tbody class="dont-break-container">
+                            <tr class="table-data-row">
+                                <td>-TOC-</td>
+                                    <td class="no-border">(H2) 062/013</td>
+                                    <td>-10</td>
+                                    <td class="no-border">(H1) 069/012</td>
+                                    <td>-8</td>
+                                    <td class="no-border">(H1) 069/012</td>
+                                    <td>-6</td>
+                                    <td class="no-border">(H1) 068/012</td>
+                                    <td>-5</td>
+                                    <td class="no-border">(H1) 068/013</td>
+                                    <td>-5</td>
+                            </tr>
+                        </tbody>
+                        <tbody class="dont-break-container">
+                            <tr class="table-data-row">
+                                <td>5846N00829E</td>
+                                    <td class="no-border">(H1) 067/014</td>
+                                    <td>-10</td>
+                                    <td class="no-border">(H0) 070/013</td>
+                                    <td>-8</td>
+                                    <td class="no-border">(H0) 070/013</td>
+                                    <td>-6</td>
+                                    <td class="no-border">(H0) 070/014</td>
+                                    <td>-5</td>
+                                    <td class="no-border">(H0) 072/014</td>
+                                    <td>-4</td>
+                            </tr>
+                        </tbody>
+                        <tbody class="dont-break-container">
+                            <tr class="table-data-row">
+                                <td>5902N00831E</td>
+                                    <td class="no-border">(H7) 061/013</td>
+                                    <td>-10</td>
+                                    <td class="no-border">(H5) 069/012</td>
+                                    <td>-8</td>
+                                    <td class="no-border">(H5) 068/012</td>
+                                    <td>-6</td>
+                                    <td class="no-border">(H6) 067/012</td>
+                                    <td>-5</td>
+                                    <td class="no-border">(H6) 067/013</td>
+                                    <td>-5</td>
+                            </tr>
+                        </tbody>
+                        <tbody class="dont-break-container">
+                            <tr class="table-data-row">
+                                <td>5920N00831E</td>
+                                    <td class="no-border">(H7) 061/013</td>
+                                    <td>-10</td>
+                                    <td class="no-border">(H5) 068/012</td>
+                                    <td>-8</td>
+                                    <td class="no-border">(H5) 068/012</td>
+                                    <td>-6</td>
+                                    <td class="no-border">(H6) 066/012</td>
+                                    <td>-5</td>
+                                    <td class="no-border">(H6) 066/013</td>
+                                    <td>-5</td>
+                            </tr>
+                        </tbody>
+                        <tbody class="dont-break-container">
+                            <tr class="table-data-row">
+                                <td>5929N00838E</td>
+                                    <td class="no-border">(H10) 061/013</td>
+                                    <td>-10</td>
+                                    <td class="no-border">(H9) 067/012</td>
+                                    <td>-8</td>
+                                    <td class="no-border">(H9) 067/012</td>
+                                    <td>-6</td>
+                                    <td class="no-border">(H9) 066/012</td>
+                                    <td>-5</td>
+                                    <td class="no-border">(H10) 065/013</td>
+                                    <td>-5</td>
+                            </tr>
+                        </tbody>
+                        <tbody class="dont-break-container">
+                            <tr class="table-data-row">
+                                <td>5944N00824E</td>
+                                    <td class="no-border">(H1) 045/004</td>
+                                    <td>-9</td>
+                                    <td class="no-border">(H2) 050/007</td>
+                                    <td>-7</td>
+                                    <td class="no-border">(H5) 040/010</td>
+                                    <td>-6</td>
+                                    <td class="no-border">(H5) 042/012</td>
+                                    <td>-5</td>
+                                    <td class="no-border">(H4) 049/013</td>
+                                    <td>-4</td>
+                            </tr>
+                        </tbody>
+                        <tbody class="dont-break-container">
+                            <tr class="table-data-row">
+                                <td>5949N00839E</td>
+                                    <td class="no-border">(H3) 051/003</td>
+                                    <td>-9</td>
+                                    <td class="no-border">(H9) 055/009</td>
+                                    <td>-8</td>
+                                    <td class="no-border">(H9) 045/009</td>
+                                    <td>-6</td>
+                                    <td class="no-border">(H10) 038/011</td>
+                                    <td>-5</td>
+                                    <td class="no-border">(H12) 045/012</td>
+                                    <td>-4</td>
+                            </tr>
+                        </tbody>
+                        <tbody class="dont-break-container">
+                            <tr class="table-data-row">
+                                <td>NOSAU</td>
+                                    <td class="no-border">(T0) 050/003</td>
+                                    <td>-9</td>
+                                    <td class="no-border">(H0) 054/009</td>
+                                    <td>-8</td>
+                                    <td class="no-border">(T1) 045/009</td>
+                                    <td>-6</td>
+                                    <td class="no-border">(T2) 038/011</td>
+                                    <td>-5</td>
+                                    <td class="no-border">(T1) 044/012</td>
+                                    <td>-4</td>
+                            </tr>
+                        </tbody>
+                        <tbody class="dont-break-container">
+                            <tr class="table-data-row">
+                                <td>LUBA</td>
+                                    <td class="no-border">(T3) 058/013</td>
+                                    <td>-10</td>
+                                    <td class="no-border">(T1) 065/012</td>
+                                    <td>-8</td>
+                                    <td class="no-border">(T1) 065/012</td>
+                                    <td>-6</td>
+                                    <td class="no-border">(T1) 063/012</td>
+                                    <td>-5</td>
+                                    <td class="no-border">(T2) 062/013</td>
+                                    <td>-5</td>
+                            </tr>
+                        </tbody>
+                        <tbody class="dont-break-container">
+                            <tr class="table-data-row">
+                                <td>MUNKE</td>
+                                    <td class="no-border">(H4) 058/014</td>
+                                    <td>-10</td>
+                                    <td class="no-border">(H5) 065/013</td>
+                                    <td>-8</td>
+                                    <td class="no-border">(H5) 064/012</td>
+                                    <td>-6</td>
+                                    <td class="no-border">(H4) 062/012</td>
+                                    <td>-5</td>
+                                    <td class="no-border">(H5) 061/013</td>
+                                    <td>-5</td>
+                            </tr>
+                        </tbody>
+                        <tbody class="dont-break-container">
+                            <tr class="table-data-row">
+                                <td>KILEB</td>
+                                    <td class="no-border">(T6) 057/014</td>
+                                    <td>-10</td>
+                                    <td class="no-border">(T4) 064/013</td>
+                                    <td>-8</td>
+                                    <td class="no-border">(T4) 064/012</td>
+                                    <td>-6</td>
+                                    <td class="no-border">(T5) 062/012</td>
+                                    <td>-5</td>
+                                    <td class="no-border">(T5) 061/013</td>
+                                    <td>-5</td>
+                            </tr>
+                        </tbody>
+                        <tbody class="dont-break-container">
+                            <tr class="table-data-row">
+                                <td>5859N00912E</td>
+                                    <td class="no-border">(T13) 057/014</td>
+                                    <td>-10</td>
+                                    <td class="no-border">(T12) 064/013</td>
+                                    <td>-8</td>
+                                    <td class="no-border">(T11) 063/012</td>
+                                    <td>-6</td>
+                                    <td class="no-border">(T12) 061/012</td>
+                                    <td>-5</td>
+                                    <td class="no-border">(T13) 060/013</td>
+                                    <td>-5</td>
+                            </tr>
+                        </tbody>
+                        <tbody class="dont-break-container">
+                            <tr class="table-data-row">
+                                <td>-TOD-</td>
+                                    <td class="no-border">(T13) 057/014</td>
+                                    <td>-10</td>
+                                    <td class="no-border">(T12) 064/013</td>
+                                    <td>-8</td>
+                                    <td class="no-border">(T11) 063/012</td>
+                                    <td>-6</td>
+                                    <td class="no-border">(T11) 061/012</td>
+                                    <td>-5</td>
+                                    <td class="no-border">(T13) 060/013</td>
+                                    <td>-5</td>
+                            </tr>
+                        </tbody>
+                        <tbody class="dont-break-container">
+                            <tr class="table-data-row">
+                                <td>5853N00902E</td>
+                                    <td class="no-border">(T13) 057/014</td>
+                                    <td>-10</td>
+                                    <td class="no-border">(T12) 064/013</td>
+                                    <td>-8</td>
+                                    <td class="no-border">(T11) 063/012</td>
+                                    <td>-6</td>
+                                    <td class="no-border">(T12) 061/012</td>
+                                    <td>-5</td>
+                                    <td class="no-border">(T13) 060/013</td>
+                                    <td>-5</td>
+                            </tr>
+                        </tbody>
+                        <tbody class="dont-break-container">
+                            <tr class="table-data-row">
+                                <td>5846N00852E</td>
+                                    <td class="no-border">(T13) 056/014</td>
+                                    <td>-10</td>
+                                    <td class="no-border">(T11) 063/013</td>
+                                    <td>-8</td>
+                                    <td class="no-border">(T11) 062/012</td>
+                                    <td>-6</td>
+                                    <td class="no-border">(T11) 060/012</td>
+                                    <td>-5</td>
+                                    <td class="no-border">(T12) 060/013</td>
+                                    <td>-5</td>
+                            </tr>
+                        </tbody>
+                        <tbody class="dont-break-container">
+                            <tr class="table-data-row">
+                                <td>GKNES</td>
+                                    <td class="no-border">(T8) 056/014</td>
+                                    <td>-10</td>
+                                    <td class="no-border">(T5) 063/013</td>
+                                    <td>-8</td>
+                                    <td class="no-border">(T5) 062/012</td>
+                                    <td>-6</td>
+                                    <td class="no-border">(T6) 060/012</td>
+                                    <td>-5</td>
+                                    <td class="no-border">(T7) 059/013</td>
+                                    <td>-5</td>
+                            </tr>
+                        </tbody>
+                        <tbody class="dont-break-container">
+                            <tr class="table-data-row">
+                                <td>GKEIV</td>
+                                    <td class="no-border">(T14) 055/014</td>
+                                    <td>-10</td>
+                                    <td class="no-border">(T12) 063/013</td>
+                                    <td>-8</td>
+                                    <td class="no-border">(T12) 061/012</td>
+                                    <td>-6</td>
+                                    <td class="no-border">(T12) 059/012</td>
+                                    <td>-5</td>
+                                    <td class="no-border">(T13) 059/013</td>
+                                    <td>-5</td>
+                            </tr>
+                        </tbody>
+                <tbody class="dont-break-container">
+                    <tr class="border-bottom text-centered bold table-data-row">
+                        <td></td>
+                                <td colspan="2" rowspan="1" class="winds-aloft-footer-cell">
+                                    <div>
+                                        <span class="no-wrap">1h45m (&#x2B;0:01)</span>,
+                                        <span class="no-wrap">9.3 g</span>
+                                    </div>
+                                    <div class="no-wrap">
+                                        Avg wind comp: H0
+                                    </div>
+                                </td>
+                                <td colspan="2" rowspan="1" class="winds-aloft-footer-cell">
+                                    <div>
+                                        <span class="no-wrap">1h45m (&#x2B;0:01)</span>,
+                                        <span class="no-wrap">9.7 g</span>
+                                    </div>
+                                    <div class="no-wrap">
+                                        Avg wind comp: H0
+                                    </div>
+                                </td>
+                                <td colspan="2" rowspan="1" class="winds-aloft-footer-cell">
+                                    <div>
+                                        <span class="no-wrap">1h45m (&#x2B;0:01)</span>,
+                                        <span class="no-wrap">9.6 g</span>
+                                    </div>
+                                    <div class="no-wrap">
+                                        Avg wind comp: T1
+                                    </div>
+                                </td>
+                                <td colspan="2" rowspan="1" class="winds-aloft-footer-cell">
+                                    <div>
+                                        <span class="no-wrap">1h44m (0:00)</span>,
+                                        <span class="no-wrap">9.8 g</span>
+                                    </div>
+                                    <div class="no-wrap">
+                                        Avg wind comp: T1
+                                    </div>
+                                </td>
+                                <td colspan="2" rowspan="1" class="winds-aloft-footer-cell">
+                                    <div>
+                                        <span class="no-wrap">1h44m (0:00)</span>,
+                                        <span class="no-wrap">10.1 g</span>
+                                    </div>
+                                    <div class="no-wrap">
+                                        Avg wind comp: T1
+                                    </div>
+                                </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
+
+
+
+    <section class="section row flight-information-region mt-20">
+
+            <div class="col-xs-6">
+                <table class="flight-information-region show-borders text-centered">
+                    <thead>
+                        <tr class="table-header-row">
+                            <th title="Flight information region" class="text-left">Flight Information Region</th>
+                            <th title="Estimated entry time">EET</th>
+                            <th title="Entry">ENTRY</th>
+                            <th title="Exit">EXIT</th>
+                            <th title="Distance">DISTANCE</th>
+                        </tr>
+                    </thead>
+							<tbody class="dont-break-container">
+								<tr class="table-data-row">
+									<td>ENOR - POLARIS</td>
+									<td>-</td>
+									<td class="no-border">1415Z</td>
+									<td>1559Z</td>
+									<td>182NM</td>
+								</tr>
+							</tbody>
+                </table>
+            </div>
+    </section>
+
+            <section class="row section">
+                <div class="col-xs-4">
+
+
+<section class="row section mt-10">
+    <div class="col-xs-12">
+        <table class="summary-times last-col-bold">
+            <thead>
+                <tr class="notesHeaderRow">
+                    <th colspan="2">Summary & Times</th>
+                </tr>
+            </thead>
+						<tbody class="dont-break-container">
+							<tr class="table-data-row">
+								<td>PIC</td>
+								<td class="pre-wrap break-word word-wrap">Tim Leijten</td>
+							</tr>
+						</tbody>
+
+					<tbody class="dont-break-container">
+						<tr class="table-data-row">
+							<td>Souls on board</td>
+							<td class="pre-wrap break-word word-wrap">2</td>
+						</tr>
+					</tbody>
+				<tbody class="dont-break-container">
+					<tr class="table-data-row">
+						<td>Tail</td>
+						<td class="pre-wrap break-word word-wrap">SELZI (C172)</td>
+					</tr>
+				</tbody>
+				<tbody class="dont-break-container">
+					<tr class="table-data-row">
+						<td>Profile</td>
+						<td class="pre-wrap break-word word-wrap">Full Power - 60% Load @ FL85 - 500 FPM</td>
+					</tr>
+				</tbody>
+					<tbody class="dont-break-container">
+						<tr class="table-data-row">
+							<td>Fuel Flow</td>
+							<td class="pre-wrap break-word word-wrap">5.5 g/hr</td>
+						</tr>
+					</tbody>
+				<tbody class="dont-break-container">
+					<tr class="table-data-row">
+						<td>Distance</td>
+						<td class="pre-wrap break-word word-wrap">182NM</td>
+					</tr>
+				</tbody>
+				<tbody class="dont-break-container">
+					<tr class="table-data-row">
+						<td>ETD</td>
+						<td class="pre-wrap break-word word-wrap">15:15 CET / 1415Z</td>
+					</tr>
+				</tbody>
+				<tbody class="dont-break-container">
+					<tr class="table-data-row">
+						<td>ETE</td>
+						<td class="pre-wrap break-word word-wrap">1h44m</td>
+					</tr>
+				</tbody>
+				<tbody class="dont-break-container">
+					<tr class="table-data-row">
+						<td>ETA</td>
+						<td class="pre-wrap break-word word-wrap">16:59 CET / 1559Z</td>
+					</tr>
+				</tbody>
+				<tbody class="dont-break-container">
+					<tr class="table-data-row">
+						<td>Route</td>
+						<td class="pre-wrap break-word word-wrap">GKJOM 5846N00829E 5902N00831E 5920N00831E 5929N00838E 5944N00824E 5949N00839E NOSAU LUBA MUNKE KILEB 5859N00912E 5853N00902E 5846N00852E GKNES GKEIV</td>
+					</tr>
+				</tbody>
+				<tbody class="dont-break-container">
+					<tr class="table-data-row">
+						<td>Altitude</td>
+						<td class="pre-wrap break-word word-wrap">FL85</td>
+					</tr>
+				</tbody>
+        </table>
+    </div>
+</section>                </div>
+                <div class="col-xs-4">
+
+
+    <section class="row section mt-10">
+        <div class="col-xs-12">
+            <table class="fuel-weights last-col-bold">
+                <thead>
+                    <tr class="table-header-row">
+                        <th colspan="2">Fuel & Weights</th>
+                    </tr>
+                </thead>
+				<tbody class="dont-break-container">
+                    <tr>
+                        <td>Block Fuel</td>
+                        <td class="">24.6 g</td>
+                    </tr>
+				</tbody>
+				<tbody class="dont-break-container">
+                    <tr>
+                        <td>Taxi Fuel</td>
+                        <td>1.2 g</td>
+                    </tr>
+				</tbody>
+				<tbody class="dont-break-container">
+                    <tr>
+                        <td>Flight Fuel</td>
+                        <td>10.8 g</td>
+                    </tr>
+				</tbody>
+				<tbody class="dont-break-container">
+                    <tr>
+                        <td>
+                            Reserve Fuel
+                        </td>
+                        <td>4.9 g</td>
+                    </tr>
+				</tbody>
+				<tbody class="dont-break-container">
+                    <tr>
+                        <td>
+                            Alternate Fuel ENCN
+                        </td>
+                        <td>2.9 g</td>
+                    </tr>
+				</tbody>
+				<tbody class="dont-break-container">
+					<tr>
+						<td>Extra Fuel</td>
+						<td>5.0 g</td>
+					</tr>
+				</tbody>
+						<tbody class="dont-break-container">
+							<tr>
+								<td>Additional</td>
+								<td>0.0 g</td>
+							</tr>
+						</tbody>
+
+
+
+					<tbody class="dont-break-container">
+						<tr>
+							<td>Payload</td>
+							<td>82 kg</td>
+						</tr>
+					</tbody>
+					<tbody class="dont-break-container">
+						<tr>
+							<td>ZFW</td>
+							<td class="">910 kg</td>
+						</tr>
+					</tbody>
+					<tbody class="dont-break-container">
+						<tr>
+							<td>TOW</td>
+							<td class="">982 kg</td>
+						</tr>
+					</tbody>
+					<tbody class="dont-break-container">
+						<tr>
+							<td>ELW</td>
+							<td class="">952 kg</td>
+						</tr>
+					</tbody>
+            </table>
+        </div>
+    </section>
+                </div>
+                <div class="col-xs-4">
+
+
+<section class="row section mt-10">
+    <div class="col-xs-12">
+        <table class="notes last-col-bold">
+            <thead>
+                <tr class="table-header-row">
+                    <th colspan="3">Notes</th>
+                </tr>
+            </thead>
+			<tbody class="dont-break-container">
+                <tr>
+                    <td class="tall">Out:</td>
+                    <td class="tall">In:</td>
+                    <td class="tall">Block time:</td>
+                </tr>
+			</tbody>
+			<tbody class="dont-break-container">
+                <tr>
+                    <td class="tall">Off:</td>
+                    <td class="tall">On:</td>
+                    <td class="tall">Flight time:</td>
+                </tr>
+			</tbody>
+					<tbody class="dont-break-container">
+						<tr>
+							<td class="tall">Start:</td>
+                            <td class="tall">Stop:</td>
+                            <td class="tall">Hobbs time:</td>
+						</tr>
+					</tbody>
+			<tbody class="dont-break-container">
+                <tr>
+                    <td class="tall">Start:</td>
+                    <td class="tall">Rem:</td>
+                    <td class="tall">Fuel used:</td>
+                </tr>
+			</tbody>
+			<tbody class="dont-break-container">
+                <tr>
+                    <td class="tall bold" colspan="3">Signature:</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>                </div>
+            </section>
+
+
+    <table class="airport-frequencies text-centered mt-20">
+        <thead>
+            <tr class="table-header-row">
+                <th></th>
+                <th title="Airport">Airport</th>
+                <th title="Estimated time of arrival">ETA</th>
+                <th title="Weather">WX</th>
+                <th title="Tower / Common traffic advisory frequency">TWR/CTAF</th>
+                <th title="Clearance">CLR</th>
+                <th title="Ground">GND</th>
+                <th title="Elevation" class="border-right">ELEV</th>
+                <th title="Longest Runway" colspan="2" class="text-centered">LONGEST RWY</th>
+            </tr>
+        </thead>
+            <tbody class="dont-break-container">
+                <tr class="table-data-row">
+                    <td class="bold" title="DEP">DEP</td>
+                    <td>
+                        ENGK
+                    </td>
+                    <td>-</td>
+                    <td>N/A</td>
+                    <td>129.9</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td class="border-right">415</td>
+                    <td>05 / 23</td>
+                    <td>4134 ft</td>
+                </tr>
+            </tbody>
+            <tbody class="dont-break-container">
+                <tr class="table-data-row">
+                    <td class="bold" title="DEST">DEST</td>
+                    <td>
+                        ENGK
+                    </td>
+                    <td>16:59 CET / 1559Z</td>
+                    <td>N/A</td>
+                    <td>129.9</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td class="border-right">415</td>
+                    <td>05 / 23</td>
+                    <td>4134 ft</td>
+                </tr>
+            </tbody>
+            <tbody class="dont-break-container">
+                <tr class="table-data-row">
+                    <td class="bold" title="ALTN">ALTN</td>
+                    <td>
+                        ENCN
+                    </td>
+                    <td>17:24 CET / 1624Z</td>
+                    <td>124.475</td>
+                    <td>121.5</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td class="border-right">57</td>
+                    <td>03 / 21</td>
+                    <td>6680 ft</td>
+                </tr>
+            </tbody>
+
+    </table>
+
+
+
+    <div class="airportDiagramUnavailable">Airport Diagrams Unavailable</div>
+            <div class="hr"></div>
+
+
+        </div>
+    </div>
+</body>
+</html>
