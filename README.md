@@ -2,12 +2,15 @@
 Program to automate filling out the OSMAA Operational Flight Plan
 
 
-# For this program to work you need to have python 3 installed along with the following libraries
-*to be added*
+# Dependencies
+- Python 3
+
+- bs4 (beautiful soup 4)
+- PyPDF2
 
 
 # How to use OFP script
-1. Open the flight's navlog page on foreflight web
+1. Open the flight's navlog page on plan.foreflight.com
 2. right click the background of the page -> view frame source
 3. ctrl + a -> crl + c
 4. paste raw text into "input.txt"
